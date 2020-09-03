@@ -10,15 +10,17 @@ export default function Home() {
         <>
             <Hero>
                 <Banner
-                    title="luxurious rooms"
-                    subtitle="deluxe rooms starting at $299"
+                    // title="luxurious rooms"
+                    title="Welcom to Author and Reader"
+                    // subtitle="deluxe rooms starting at $299"
+                    subtitle="You can find the most suitable books for you"
                 >
                     <Link to="/rooms" className="btn-primary">
-                        our rooms
+                        Books
           </Link>
                 </Banner>
             </Hero>
-            <Services />
+            {/* <Services /> */}
             <FeaturedRooms />
         </>);
 }

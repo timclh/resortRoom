@@ -19,11 +19,11 @@ export default class FeaturedRooms extends Component {
                 {/* {greeting} {name} */}
                 {/* from featured Rooms
                 <Room /> */}
-                <Title title="featured rooms" />
+                <Title title="featured books" />
                 <div className="featured-rooms-center">
                     {loading ? <Loading /> : rooms}
                 </div>
-                <Loading />
+                {/* <Loading /> */}
             </section>
         )
     }
