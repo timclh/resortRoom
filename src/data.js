@@ -31,7 +31,7 @@ export default [
       breakfast: false,
       featured: false,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "Our Single Economy room offers everything you need for a comfortable stay. Featuring a plush queen-sized bed, modern amenities, and a peaceful atmosphere, this room is ideal for business travelers or solo adventurers seeking quality accommodation at an affordable price. Enjoy complimentary Wi-Fi, a work desk, and access to our fitness center.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -88,7 +88,7 @@ export default [
       breakfast: false,
       featured: false,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "Step into comfort with our Single Basic room. This thoughtfully designed space features premium bedding, a spacious bathroom with rain shower, and a cozy seating area. Perfect for guests who appreciate simplicity without compromising on quality. Wake up refreshed and ready to explore with our complimentary morning coffee.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -145,7 +145,7 @@ export default [
       breakfast: false,
       featured: false,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "Experience elevated comfort in our Single Standard room. Enjoy additional living space, a luxurious king-sized bed, and a private balcony with stunning views. This pet-friendly room includes a mini-bar, smart TV with streaming services, and premium toiletries. The perfect retreat after a day of adventure.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -202,7 +202,7 @@ export default [
       breakfast: true,
       featured: false,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "Indulge in our Single Deluxe room, where luxury meets comfort. This spacious retreat features a pillow-top king bed, spa-inspired bathroom with soaking tub, and exclusive access to our executive lounge. Complimentary breakfast, evening turndown service, and premium amenities ensure an unforgettable stay.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -259,7 +259,7 @@ export default [
       breakfast: false,
       featured: false,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "Our Double Economy room provides excellent value for couples or traveling companions. Featuring two comfortable beds or one queen bed, ample closet space, and a functional workspace, this room delivers comfort without breaking the bank. Enjoy free parking and complimentary morning coffee.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -316,7 +316,7 @@ export default [
       breakfast: false,
       featured: false,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "The Double Basic room offers generous space and modern comforts for two guests. Relax on premium mattresses, enjoy the large flat-screen TV, and freshen up in the beautifully appointed bathroom. Ideal for weekend getaways or extended stays with friends.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -373,7 +373,7 @@ export default [
       breakfast: false,
       featured: false,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "Discover the perfect blend of space and style in our Double Standard room. This pet-friendly accommodation features a sitting area, work desk, and panoramic windows showcasing beautiful surroundings. Two queen beds ensure restful sleep, while modern amenities keep you connected.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -430,7 +430,7 @@ export default [
       breakfast: true,
       featured: true,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "Our Double Deluxe room redefines comfort for two. Sink into plush king beds, enjoy the spacious living area, and pamper yourself in the marble bathroom with dual vanities. Complimentary gourmet breakfast, evening appetizers, and concierge service make this the ultimate couples' retreat.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -487,7 +487,7 @@ export default [
       breakfast: false,
       featured: false,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "Create family memories without stretching your budget in our Family Economy room. Designed with families in mind, this room features flexible sleeping arrangements for up to 3 guests, a mini-refrigerator, and kid-friendly amenities. Enjoy easy access to our pool and playground areas.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -544,7 +544,7 @@ export default [
       breakfast: false,
       featured: false,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "Our Family Basic room provides the space and comfort your family needs. Accommodating up to 4 guests, this room features a king bed plus twin bunks or rollaway options, a seating area for family time, and a generous bathroom. Kids stay free and enjoy our activity programs.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -601,7 +601,7 @@ export default [
       breakfast: false,
       featured: false,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "The Family Standard room offers the space and privacy families need. This pet-friendly suite features a master sleeping area plus separate space for children, a full sofa bed, and a kitchenette for family snacks. Enjoy our kids' club and family pool activities.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -658,7 +658,7 @@ export default [
       breakfast: true,
       featured: true,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "Experience family travel at its finest in our Family Deluxe suite. This expansive accommodation sleeps up to 6 guests in supreme comfort, featuring a master bedroom, children's sleeping area, living room, and dining space. Complimentary breakfast, kids' activity programs, and dedicated family concierge service included.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",
@@ -715,7 +715,7 @@ export default [
       breakfast: true,
       featured: true,
       description:
-        "Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn tattooed pickled chambray. Actually humblebrag next level, deep v art party wolf tofu direct trade readymade sustainable hell of banjo. Organic authentic subway tile cliche palo santo, street art XOXO dreamcatcher retro sriracha portland air plant kitsch stumptown. Austin small batch squid gastropub. Pabst pug tumblr gochujang offal retro cloud bread bushwick semiotics before they sold out sartorial literally mlkshk. Vaporware hashtag vice, sartorial before they sold out pok pok health goth trust fund cray.",
+        "The Presidential Suite represents the pinnacle of luxury accommodation. Spanning 1000 square feet, this magnificent suite features a grand master bedroom, formal living and dining areas, private study, and a spa-inspired bathroom with sauna. Enjoy 24-hour butler service, complimentary airport transfers, exclusive lounge access, and customized experiences tailored to your preferences.",
       extras: [
         "Plush pillows and breathable bed linens",
         "Soft, oversized bath towels",

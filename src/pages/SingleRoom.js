@@ -9,17 +9,34 @@ import StyledHero from "../components/StyledHero";
 export default class SingleRoom extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       slug: this.props.match.params.slug,
       defaultBcg: defaultBcg
     };
+    this.previousTitle = document.title;
   }
   static contextType = RoomContext;
 
-  // componentDidMount() {
-  //   console.log(this.props);
-  // }
+  componentDidMount() {
+    this.updatePageTitle();
+  }
+
+  componentDidUpdate() {
+    this.updatePageTitle();
+  }
+
+  componentWillUnmount() {
+    document.title = this.previousTitle;
+  }
+
+  updatePageTitle() {
+    const { getRoom } = this.context;
+    const room = getRoom(this.state.slug);
+    if (room) {
+      document.title = `${room.name} | Beach Resort`;
+    }
+  }
+
   render() {
     const { getRoom } = this.context;
     const room = getRoom(this.state.slug);
