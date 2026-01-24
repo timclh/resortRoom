@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Loading from './components/Loading';
 
@@ -15,12 +15,12 @@ function App() {
     <>
       <Navbar />
       <Suspense fallback={<Loading />}>
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/rooms' component={Rooms} />
-          <Route exact path='/rooms/:slug' component={SingleRoom} />
-          <Route component={Error} />
-        </Switch>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/rooms' element={<Rooms />} />
+          <Route path='/rooms/:slug' element={<SingleRoom />} />
+          <Route path='*' element={<Error />} />
+        </Routes>
       </Suspense>
     </>
   );
