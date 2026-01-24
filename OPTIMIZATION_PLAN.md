@@ -497,6 +497,16 @@ export default reportWebVitals;
 - [ ] Add useMemo/useCallback optimizations
 - [ ] Implement CSS optimization
 
+### Phase 6: Content & SEO Optimization (Days 11-14)
+- [ ] Replace all placeholder/Lorem ipsum text
+- [ ] Write unique descriptions for all 13 rooms
+- [ ] Update Services component with meaningful content
+- [ ] Update index.html with SEO meta tags
+- [ ] Add Open Graph and Twitter card meta tags
+- [ ] Create centralized content/strings file
+- [ ] Implement dynamic page titles
+- [ ] (Optional) Set up i18n for multi-language support
+
 ---
 
 ## Expected Results
@@ -518,6 +528,353 @@ export default reportWebVitals;
 - **Web Vitals:** https://web.dev/vitals/
 - **Lighthouse:** Chrome DevTools > Lighthouse tab
 - **Workbox:** https://developers.google.com/web/tools/workbox
+
+---
+
+---
+
+## Priority 9: Static Content & SEO Optimization (Medium Impact)
+
+### Problems Identified
+
+#### 9.1 Placeholder/Lorem Ipsum Content
+**Location:** `src/data.js` and `src/components/Services.js`
+
+All 13 room descriptions use identical "hipster ipsum" placeholder text:
+```
+"Street art edison bulb gluten-free, tofu try-hard lumbersexual brooklyn..."
+```
+
+All 4 service descriptions use identical Lorem ipsum:
+```
+"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias molestias eius libero?"
+```
+
+**Impact:**
+- Poor SEO (duplicate/meaningless content)
+- Unprofessional appearance
+- Missed keyword opportunities
+
+#### 9.2 Missing/Generic Meta Tags
+**Location:** `public/index.html`
+
+Current meta description is generic CRA default:
+```html
+<meta name="description" content="Web site created using create-react-app" />
+```
+
+Missing important meta tags for SEO and social sharing.
+
+#### 9.3 Hardcoded Strings in Components
+Static text scattered across components makes:
+- Content updates difficult
+- Internationalization (i18n) impossible
+- A/B testing challenging
+
+### Solutions
+
+#### 9.1 Create Unique Room Descriptions
+```javascript
+// src/content/roomDescriptions.js
+export const ROOM_DESCRIPTIONS = {
+  "single-economy": {
+    short: "Cozy and affordable room perfect for solo travelers.",
+    full: "Our Single Economy room offers everything you need for a comfortable stay. Featuring a plush queen-sized bed, modern amenities, and a peaceful atmosphere, this room is ideal for business travelers or solo adventurers seeking quality accommodation at an affordable price. Enjoy complimentary Wi-Fi, a work desk, and access to our fitness center."
+  },
+  "single-basic": {
+    short: "Comfortable single room with essential amenities.",
+    full: "Step into comfort with our Single Basic room. This thoughtfully designed space features premium bedding, a spacious bathroom with rain shower, and a cozy seating area. Perfect for guests who appreciate simplicity without compromising on quality. Wake up refreshed and ready to explore with our complimentary continental breakfast."
+  },
+  "single-standard": {
+    short: "Upgraded single room with extra space and amenities.",
+    full: "Experience elevated comfort in our Single Standard room. Enjoy additional living space, a luxurious king-sized bed, and a private balcony with stunning views. This pet-friendly room includes a mini-bar, smart TV with streaming services, and premium toiletries. The perfect retreat after a day of adventure."
+  },
+  "single-deluxe": {
+    short: "Premium single room with luxury touches throughout.",
+    full: "Indulge in our Single Deluxe room, where luxury meets comfort. This spacious retreat features a pillow-top king bed, spa-inspired bathroom with soaking tub, and exclusive access to our executive lounge. Complimentary breakfast, evening turndown service, and premium amenities ensure an unforgettable stay."
+  },
+  "double-economy": {
+    short: "Affordable double room ideal for couples or friends.",
+    full: "Our Double Economy room provides excellent value for couples or traveling companions. Featuring two comfortable beds or one queen bed, ample closet space, and a functional workspace, this room delivers comfort without breaking the bank. Enjoy free parking and complimentary morning coffee."
+  },
+  "double-basic": {
+    short: "Spacious double room with modern conveniences.",
+    full: "The Double Basic room offers generous space and modern comforts for two guests. Relax on premium mattresses, enjoy the large flat-screen TV, and freshen up in the beautifully appointed bathroom. Ideal for weekend getaways or extended stays with friends."
+  },
+  "double-standard": {
+    short: "Enhanced double room with upgraded amenities and views.",
+    full: "Discover the perfect blend of space and style in our Double Standard room. This pet-friendly accommodation features a sitting area, work desk, and panoramic windows showcasing beautiful surroundings. Two queen beds ensure restful sleep, while modern amenities keep you connected."
+  },
+  "double-deluxe": {
+    short: "Luxurious double room with premium features and breakfast.",
+    full: "Our Double Deluxe room redefines comfort for two. Sink into plush king beds, enjoy the spacious living area, and pamper yourself in the marble bathroom with dual vanities. Complimentary gourmet breakfast, evening appetizers, and concierge service make this the ultimate couples' retreat."
+  },
+  "family-economy": {
+    short: "Budget-friendly room perfect for families.",
+    full: "Create family memories without stretching your budget in our Family Economy room. Designed with families in mind, this room features flexible sleeping arrangements for up to 3 guests, a mini-refrigerator, and kid-friendly amenities. Enjoy easy access to our pool and playground areas."
+  },
+  "family-basic": {
+    short: "Comfortable family room with space for everyone.",
+    full: "Our Family Basic room provides the space and comfort your family needs. Accommodating up to 4 guests, this room features a king bed plus twin bunks or rollaway options, a seating area for family time, and a generous bathroom. Kids stay free and enjoy our activity programs."
+  },
+  "family-standard": {
+    short: "Spacious family suite with separate sleeping areas.",
+    full: "The Family Standard room offers the space and privacy families need. This pet-friendly suite features a master sleeping area plus separate space for children, a full sofa bed, and a kitchenette for family snacks. Enjoy our kids' club and family pool activities."
+  },
+  "family-deluxe": {
+    short: "Premium family suite with luxury amenities and services.",
+    full: "Experience family travel at its finest in our Family Deluxe suite. This expansive accommodation sleeps up to 6 guests in supreme comfort, featuring a master bedroom, children's sleeping area, living room, and dining space. Complimentary breakfast, kids' activity programs, and dedicated family concierge service included."
+  },
+  "presidential-room": {
+    short: "The ultimate luxury experience for discerning guests.",
+    full: "The Presidential Suite represents the pinnacle of luxury accommodation. Spanning 1000 square feet, this magnificent suite features a grand master bedroom, formal living and dining areas, private study, and a spa-inspired bathroom with sauna. Enjoy 24-hour butler service, complimentary airport transfers, exclusive lounge access, and customized experiences tailored to your preferences."
+  }
+};
+```
+
+#### 9.2 Create Meaningful Service Descriptions
+```javascript
+// src/content/serviceDescriptions.js
+export const SERVICES = [
+  {
+    id: "cocktails",
+    icon: "FaCocktail",
+    title: "Free Cocktails",
+    info: "Unwind with our complimentary signature cocktails, served daily at sunset in our poolside lounge. Our expert mixologists craft refreshing drinks using locally-sourced ingredients."
+  },
+  {
+    id: "hiking",
+    icon: "FaHiking",
+    title: "Endless Hiking",
+    info: "Explore miles of scenic trails right from our doorstep. Our concierge provides guided hiking tours, trail maps, and packed lunches for your outdoor adventures."
+  },
+  {
+    id: "shuttle",
+    icon: "FaShuttleVan",
+    title: "Free Shuttle",
+    info: "Enjoy complimentary shuttle service to local attractions, shopping centers, and the airport. Scheduled departures every 30 minutes from 6 AM to 10 PM."
+  },
+  {
+    id: "beer",
+    icon: "FaBeer",
+    title: "Craft Beer Selection",
+    info: "Discover our curated selection of local craft beers at our resort brewery. Join our daily tasting sessions and learn about regional brewing traditions."
+  }
+];
+```
+
+#### 9.3 Update Meta Tags for SEO
+```html
+<!-- public/index.html -->
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Primary Meta Tags -->
+  <title>Beach Resort | Luxury Rooms & Vacation Rentals</title>
+  <meta name="title" content="Beach Resort | Luxury Rooms & Vacation Rentals" />
+  <meta name="description" content="Experience luxury beachfront accommodation at Beach Resort. Book from our selection of single, double, family, and presidential rooms. Best rates guaranteed with free breakfast and amenities." />
+  <meta name="keywords" content="beach resort, luxury hotel, vacation rental, beachfront rooms, family hotel, hotel booking" />
+  <meta name="author" content="Beach Resort" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourresort.com/" />
+  <meta property="og:title" content="Beach Resort | Luxury Rooms & Vacation Rentals" />
+  <meta property="og:description" content="Experience luxury beachfront accommodation. Book single, double, family, or presidential rooms with best rates guaranteed." />
+  <meta property="og:image" content="%PUBLIC_URL%/og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://yourresort.com/" />
+  <meta property="twitter:title" content="Beach Resort | Luxury Rooms & Vacation Rentals" />
+  <meta property="twitter:description" content="Experience luxury beachfront accommodation. Book single, double, family, or presidential rooms with best rates guaranteed." />
+  <meta property="twitter:image" content="%PUBLIC_URL%/og-image.jpg" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://yourresort.com/" />
+
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+</head>
+```
+
+#### 9.4 Centralize All Static Strings
+```javascript
+// src/content/strings.js - Central content management
+export const STRINGS = {
+  // Navigation
+  nav: {
+    home: "Home",
+    rooms: "Rooms",
+    about: "About Us",
+    contact: "Contact"
+  },
+
+  // Home page
+  home: {
+    heroTitle: "Luxurious Rooms",
+    heroSubtitle: "Deluxe rooms starting at $299",
+    ctaButton: "Our Rooms",
+    servicesTitle: "Services"
+  },
+
+  // Rooms page
+  rooms: {
+    heroTitle: "Our Rooms",
+    backButton: "Return Home",
+    filterTitle: "Search Rooms",
+    noResults: "Unfortunately no rooms matched your search parameters",
+    perNight: "per night"
+  },
+
+  // Room details
+  roomDetails: {
+    detailsTitle: "Details",
+    infoTitle: "Info",
+    priceLabel: "Price",
+    sizeLabel: "Size",
+    sizeUnit: "SQFT",
+    capacityLabel: "Max Capacity",
+    capacityUnit: "people",
+    petsAllowed: "Pets allowed",
+    noPets: "No pets allowed",
+    breakfastIncluded: "Free breakfast included",
+    extrasTitle: "Extras",
+    notFound: "No such room could be found..."
+  },
+
+  // Filter labels
+  filter: {
+    roomType: "Room Type",
+    allTypes: "All",
+    guests: "Guests",
+    price: "Room Price",
+    roomSize: "Room Size",
+    breakfast: "Breakfast",
+    pets: "Pets"
+  },
+
+  // Loading states
+  loading: {
+    rooms: "Loading rooms data...",
+    general: "Loading..."
+  },
+
+  // Error page
+  error: {
+    title: "Page Not Found",
+    message: "The page you are looking for does not exist.",
+    backButton: "Return Home"
+  }
+};
+
+// Usage in components:
+// import { STRINGS } from '../content/strings';
+// <h1>{STRINGS.home.heroTitle}</h1>
+```
+
+#### 9.5 Implement Dynamic Page Titles
+```javascript
+// src/hooks/usePageTitle.js
+import { useEffect } from 'react';
+
+const BASE_TITLE = 'Beach Resort';
+
+export const usePageTitle = (title) => {
+  useEffect(() => {
+    document.title = title ? `${title} | ${BASE_TITLE}` : BASE_TITLE;
+
+    // Update meta description dynamically
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription && title) {
+      // Could also accept description as parameter
+    }
+
+    return () => {
+      document.title = BASE_TITLE;
+    };
+  }, [title]);
+};
+
+// Usage:
+// const Home = () => {
+//   usePageTitle('Luxury Accommodation');
+//   return <div>...</div>;
+// };
+```
+
+#### 9.6 Prepare for Internationalization (i18n)
+```bash
+npm install react-i18next i18next
+```
+
+```javascript
+// src/i18n/index.js
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+import en from './locales/en.json';
+import es from './locales/es.json';
+import fr from './locales/fr.json';
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: {
+      en: { translation: en },
+      es: { translation: es },
+      fr: { translation: fr }
+    },
+    lng: 'en',
+    fallbackLng: 'en',
+    interpolation: {
+      escapeValue: false
+    }
+  });
+
+export default i18n;
+```
+
+```json
+// src/i18n/locales/en.json
+{
+  "nav": {
+    "home": "Home",
+    "rooms": "Rooms"
+  },
+  "home": {
+    "heroTitle": "Luxurious Rooms",
+    "heroSubtitle": "Deluxe rooms starting at ${{price}}"
+  },
+  "rooms": {
+    "perNight": "per night",
+    "noResults": "No rooms match your criteria"
+  }
+}
+```
+
+### Implementation Checklist
+
+- [ ] Replace all Lorem ipsum in `Services.js` with meaningful descriptions
+- [ ] Replace placeholder descriptions in `data.js` with unique room content
+- [ ] Update `index.html` with proper meta tags and SEO content
+- [ ] Create `src/content/` directory for centralized string management
+- [ ] Implement `usePageTitle` hook for dynamic page titles
+- [ ] Add Open Graph images for social sharing
+- [ ] Consider i18n setup for future multi-language support
+
+### SEO Impact Summary
+
+| Issue | Before | After |
+|-------|--------|-------|
+| Meta Description | Generic CRA text | Keyword-rich resort description |
+| Room Descriptions | 13 identical placeholder texts | 13 unique, SEO-optimized descriptions |
+| Service Descriptions | 4 identical Lorem ipsum | 4 meaningful service descriptions |
+| Page Titles | Static "Resort" | Dynamic per-page titles |
+| Social Sharing | No OG tags | Full Open Graph & Twitter cards |
 
 ---
 
