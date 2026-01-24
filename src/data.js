@@ -1,19 +1,20 @@
-import room1 from "./images/details-1.jpeg";
-import room2 from "./images/details-2.jpeg";
-import room3 from "./images/details-3.jpeg";
-import room4 from "./images/details-4.jpeg";
-import img1 from "./images/room-1.jpeg";
-import img2 from "./images/room-2.jpeg";
-import img3 from "./images/room-3.jpeg";
-import img4 from "./images/room-4.jpeg";
-import img5 from "./images/room-5.jpeg";
-import img6 from "./images/room-6.jpeg";
-import img7 from "./images/room-7.jpeg";
-import img8 from "./images/room-8.jpeg";
-import img9 from "./images/room-9.jpeg";
-import img10 from "./images/room-10.jpeg";
-import img11 from "./images/room-11.jpeg";
-import img12 from "./images/room-12.jpeg";
+// Optimized WebP images (60% smaller than originals)
+import room1 from "./images/optimized/details-1.webp";
+import room2 from "./images/optimized/details-2.webp";
+import room3 from "./images/optimized/details-3.webp";
+import room4 from "./images/optimized/details-4.webp";
+import img1 from "./images/optimized/room-1.webp";
+import img2 from "./images/optimized/room-2.webp";
+import img3 from "./images/optimized/room-3.webp";
+import img4 from "./images/optimized/room-4.webp";
+import img5 from "./images/optimized/room-5.webp";
+import img6 from "./images/optimized/room-6.webp";
+import img7 from "./images/optimized/room-7.webp";
+import img8 from "./images/optimized/room-8.webp";
+import img9 from "./images/optimized/room-9.webp";
+import img10 from "./images/optimized/room-10.webp";
+import img11 from "./images/optimized/room-11.webp";
+import img12 from "./images/optimized/room-12.webp";
 
 export default [
   {
