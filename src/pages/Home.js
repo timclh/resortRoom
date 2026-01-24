@@ -4,7 +4,11 @@ import Hero from "../components/Hero";
 import Banner from "../components/Banner";
 import Services from "../components/Services";
 import FeaturedRooms from "../components/FeaturedRooms";
-const home = () => {
+import { usePageTitle } from "../hooks/usePageTitle";
+
+const Home = () => {
+  usePageTitle("Luxury Accommodation", "Experience luxury beachfront accommodation at Beach Resort. Book from our selection of single, double, family, and presidential rooms.");
+
   return (
     <>
       <Hero>
@@ -23,4 +27,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;
