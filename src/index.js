@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { RoomProvider } from './context';
 
@@ -22,3 +23,7 @@ root.render(
 
 // Enable service worker for offline support and faster loading
 serviceWorker.register();
+
+// Report Web Vitals for performance monitoring
+// In production, you could send these metrics to an analytics endpoint
+reportWebVitals(console.log);

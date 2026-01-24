@@ -1,173 +1,135 @@
-import React, { Component } from 'react'
-import items from "./data"
-import Client from "./Contentful";
+import React, { createContext, useState, useEffect, useCallback, useMemo } from 'react';
+import items from "./data";
 
+const RoomContext = createContext();
 
-const RoomContext = React.createContext();
+const RoomProvider = ({ children }) => {
+  const [rooms, setRooms] = useState([]);
+  const [sortedRooms, setSortedRooms] = useState([]);
+  const [featuredRooms, setFeaturedRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default class RoomProvider extends Component {
-    state = {
-        // name: "john",
-        // greeting: "hello",
-        rooms: [],
-        sortedRooms: [],
-        featuredRooms: [],
-        loading: true,
+  // Filter state
+  const [filters, setFilters] = useState({
+    type: "all",
+    capacity: 1,
+    price: 0,
+    minPrice: 0,
+    maxPrice: 0,
+    minSize: 0,
+    maxSize: 0,
+    breakfast: false,
+    pets: false
+  });
 
-        type: "all",
-        capacity: 1,
-        price: 0,
-        minPrice: 0,
-        maxPrice: 0,
-        minSize: 0,
-        maxSize: 0,
-        breakfast: false,
-        pets: false
-    };
+  // Format data from Contentful structure
+  const formatData = useCallback((items) => {
+    return items.map(item => {
+      const id = item.sys.id;
+      const images = item.fields.images.map(image => image.fields.file.url);
+      return { ...item.fields, images, id };
+    });
+  }, []);
 
-    // getData = async () => {
-    //     try {
-    //         let response = await Client.getEntries({
-    //             content_type: "beachResortRoom",
-    //             // order: "sys.createdAt"
-    //             order: "fields.price"
-    //         });
-    //         let rooms = this.formatData(response.items);
+  // Initialize rooms data
+  useEffect(() => {
+    const formattedRooms = formatData(items);
+    const featured = formattedRooms.filter(room => room.featured === true);
+    const maxPrice = Math.max(...formattedRooms.map(item => item.price));
+    const maxSize = Math.max(...formattedRooms.map(item => item.size));
 
-    //         let featuredRooms = rooms.filter(room => room.featured === true);
-    //         //
-    //         let maxPrice = Math.max(...rooms.map(item => item.price));
-    //         let maxSize = Math.max(...rooms.map(item => item.size));
-    //         this.setState({
-    //             rooms,
-    //             featuredRooms,
-    //             sortedRooms: rooms,
-    //             loading: false,
-    //             //
-    //             price: maxPrice,
-    //             maxPrice,
-    //             maxSize
-    //         });
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+    setRooms(formattedRooms);
+    setFeaturedRooms(featured);
+    setSortedRooms(formattedRooms);
+    setFilters(prev => ({
+      ...prev,
+      price: maxPrice,
+      maxPrice,
+      maxSize
+    }));
+    setLoading(false);
+  }, [formatData]);
 
-    componentDidMount() {
-        // this.getData();
-        let rooms = this.formatData(items);
-        let featuredRooms = rooms.filter(room => room.featured === true);
-        let maxPrice = Math.max(...rooms.map(item => item.price));
-        let maxSize = Math.max(...rooms.map(item => item.size));
-        this.setState({
-            rooms,
-            featuredRooms,
-            sortedRooms: rooms,
-            loading: false,
-            //
-            price: maxPrice,
-            maxPrice,
-            maxSize
-        });
+  // Filter rooms whenever filters change
+  useEffect(() => {
+    if (rooms.length === 0) return;
+
+    let tempRooms = [...rooms];
+    const { type, capacity, price, minSize, maxSize, breakfast, pets } = filters;
+
+    // Filter by type
+    if (type !== "all") {
+      tempRooms = tempRooms.filter(room => room.type === type);
+    }
+    // Filter by capacity
+    if (parseInt(capacity) !== 1) {
+      tempRooms = tempRooms.filter(room => room.capacity >= parseInt(capacity));
+    }
+    // Filter by price
+    tempRooms = tempRooms.filter(room => room.price <= parseInt(price));
+    // Filter by size
+    tempRooms = tempRooms.filter(
+      room => room.size >= minSize && room.size <= maxSize
+    );
+    // Filter by breakfast
+    if (breakfast) {
+      tempRooms = tempRooms.filter(room => room.breakfast === true);
+    }
+    // Filter by pets
+    if (pets) {
+      tempRooms = tempRooms.filter(room => room.pets === true);
     }
 
-    formatData(items) {
-        let tempItems = items.map(item => {
-            let id = item.sys.id;
-            let images = item.fields.images.map(image => image.fields.file.url);
+    setSortedRooms(tempRooms);
+  }, [rooms, filters]);
 
-            let room = { ...item.fields, images, id };
-            return room;
-        });
-        return tempItems;
-    }
-    getRoom = slug => {
-        let tempRooms = [...this.state.rooms];
-        const room = tempRooms.find(room => room.slug === slug);
-        return room;
-    };
+  // Get single room by slug - memoized
+  const getRoom = useCallback((slug) => {
+    return rooms.find(room => room.slug === slug);
+  }, [rooms]);
 
-    handleChange = event => {
-        const target = event.target;
-        const value = target.type === "checkbox" ? target.checked : target.value;
-        const name = target.name;
-        console.log(name, value);
+  // Handle filter changes - memoized
+  const handleChange = useCallback((event) => {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
 
-        this.setState(
-            {
-                [name]: value
-            },
-            this.filterRooms
-        );
-    };
-    filterRooms = () => {
-        let {
-            rooms,
-            type,
-            capacity,
-            price,
-            minSize,
-            maxSize,
-            breakfast,
-            pets
-        } = this.state;
-        let tempRooms = [...rooms];
-        // transform values
-        // get capacity
-        capacity = parseInt(capacity);
-        price = parseInt(price);
-        // filter by type
-        if (type !== "all") {
-            tempRooms = tempRooms.filter(room => room.type === type);
-        }
-        // filter by capacity
-        if (capacity !== 1) {
-            tempRooms = tempRooms.filter(room => room.capacity >= capacity);
-        }
-        // filter by price
-        tempRooms = tempRooms.filter(room => room.price <= price);
-        //filter by size
-        tempRooms = tempRooms.filter(
-            room => room.size >= minSize && room.size <= maxSize
-        );
-        //filter by breakfast
-        if (breakfast) {
-            tempRooms = tempRooms.filter(room => room.breakfast === true);
-        }
-        //filter by pets
-        if (pets) {
-            tempRooms = tempRooms.filter(room => room.pets === true);
-        }
-        this.setState({
-            sortedRooms: tempRooms
-        });
+    setFilters(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }, []);
 
-    }
+  // Memoize context value to prevent unnecessary re-renders
+  const contextValue = useMemo(() => ({
+    rooms,
+    sortedRooms,
+    featuredRooms,
+    loading,
+    ...filters,
+    getRoom,
+    handleChange
+  }), [rooms, sortedRooms, featuredRooms, loading, filters, getRoom, handleChange]);
 
-    render() {
-        return (
-            <RoomContext.Provider
-                value={{
-                    ...this.state,
-                    getRoom: this.getRoom,
-                    handleChange: this.handleChange
-                }}
-            >
-                {this.props.children}
-            </RoomContext.Provider>
-        );
-    }
-}
+  return (
+    <RoomContext.Provider value={contextValue}>
+      {children}
+    </RoomContext.Provider>
+  );
+};
 
 const RoomConsumer = RoomContext.Consumer;
+
 export { RoomProvider, RoomConsumer, RoomContext };
 
 export function withRoomConsumer(Component) {
-    return function ConsumerWrapper(props) {
-        return (
-            <RoomConsumer>
-                {value => <Component {...props} context={value} />}
-            </RoomConsumer>
-        );
-    };
+  return function ConsumerWrapper(props) {
+    return (
+      <RoomConsumer>
+        {value => <Component {...props} context={value} />}
+      </RoomConsumer>
+    );
+  };
 }
+
+export default RoomProvider;
