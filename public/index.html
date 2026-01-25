@@ -30,6 +30,50 @@
 
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Hotel",
+    "name": "Beach Resort",
+    "description": "Experience luxury beachfront accommodation at Beach Resort. Book from our selection of single, double, family, and presidential rooms.",
+    "url": "https://beachresort.com",
+    "telephone": "+1-234-567-890",
+    "email": "info@beachresort.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Beach Resort Drive",
+      "addressLocality": "Paradise Coast",
+      "postalCode": "12345",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "25.7617",
+      "longitude": "-80.1918"
+    },
+    "image": "https://beachresort.com/logo512.png",
+    "priceRange": "$100 - $600",
+    "starRating": {
+      "@type": "Rating",
+      "ratingValue": "4.5"
+    },
+    "amenityFeature": [
+      {"@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Swimming Pool", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Pet Friendly", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Shuttle Service", "value": true}
+    ],
+    "checkinTime": "15:00",
+    "checkoutTime": "11:00",
+    "availableLanguage": ["English", "Spanish"],
+    "paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
+    "currenciesAccepted": "USD"
+  }
+  </script>
 </head>
 
 <body>
