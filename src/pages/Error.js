@@ -17,7 +17,7 @@ const Error = memo(() => {
         </Banner>
       </Hero>
 
-      <section className="error-section" id="main-content">
+      <section className="error-section">
         <div className="error-content">
           <h3>What would you like to do?</h3>
           <div className="error-actions">

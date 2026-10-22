@@ -10,85 +10,66 @@
   <!-- Primary Meta Tags -->
   <title>Beach Resort | Luxury Rooms & Vacation Rentals</title>
   <meta name="title" content="Beach Resort | Luxury Rooms & Vacation Rentals" />
-  <meta name="description" content="Experience luxury beachfront accommodation at Beach Resort. Book from our selection of single, double, family, and presidential rooms. Best rates guaranteed with free breakfast and amenities." />
-  <meta name="keywords" content="beach resort, luxury hotel, vacation rental, beachfront rooms, family hotel, hotel booking, resort accommodation" />
+  <meta name="description" content="Experience luxury beachfront accommodation at Beach Resort. Choose from single, double, family, and presidential rooms." />
   <meta name="author" content="Beach Resort" />
+
+  <!--
+    __SITE_URL__ is replaced with the deployed site's origin by
+    scripts/postbuild.js (it reads Netlify's URL variable). Social crawlers need
+    absolute URLs for og:image.
+  -->
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="%PUBLIC_URL%/" />
+  <meta property="og:site_name" content="Beach Resort" />
+  <meta property="og:url" content="__SITE_URL__/" />
   <meta property="og:title" content="Beach Resort | Luxury Rooms & Vacation Rentals" />
-  <meta property="og:description" content="Experience luxury beachfront accommodation. Book single, double, family, or presidential rooms with best rates guaranteed." />
-  <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+  <meta property="og:description" content="Experience luxury beachfront accommodation. Choose from single, double, family, or presidential rooms." />
+  <meta property="og:image" content="__SITE_URL__/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="%PUBLIC_URL%/" />
   <meta name="twitter:title" content="Beach Resort | Luxury Rooms & Vacation Rentals" />
-  <meta name="twitter:description" content="Experience luxury beachfront accommodation. Book single, double, family, or presidential rooms with best rates guaranteed." />
-  <meta name="twitter:image" content="%PUBLIC_URL%/logo512.png" />
+  <meta name="twitter:description" content="Experience luxury beachfront accommodation. Choose from single, double, family, or presidential rooms." />
+  <meta name="twitter:image" content="__SITE_URL__/og-image.jpg" />
 
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-  <!-- JSON-LD Structured Data for SEO -->
+  <!-- Structured data. Only facts the site actually states are included. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Hotel",
     "name": "Beach Resort",
-    "description": "Experience luxury beachfront accommodation at Beach Resort. Book from our selection of single, double, family, and presidential rooms.",
-    "url": "https://beachresort.com",
-    "telephone": "+1-234-567-890",
-    "email": "info@beachresort.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "123 Beach Resort Drive",
-      "addressLocality": "Paradise Coast",
-      "postalCode": "12345",
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "25.7617",
-      "longitude": "-80.1918"
-    },
-    "image": "https://beachresort.com/logo512.png",
-    "priceRange": "$100 - $600",
-    "starRating": {
-      "@type": "Rating",
-      "ratingValue": "4.5"
-    },
-    "amenityFeature": [
-      {"@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true},
-      {"@type": "LocationFeatureSpecification", "name": "Swimming Pool", "value": true},
-      {"@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true},
-      {"@type": "LocationFeatureSpecification", "name": "Pet Friendly", "value": true},
-      {"@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true},
-      {"@type": "LocationFeatureSpecification", "name": "Shuttle Service", "value": true}
-    ],
-    "checkinTime": "15:00",
-    "checkoutTime": "11:00",
-    "availableLanguage": ["English", "Spanish"],
-    "paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
-    "currenciesAccepted": "USD"
+    "description": "Single, double, family, and presidential rooms.",
+    "url": "__SITE_URL__/",
+    "image": "__SITE_URL__/og-image.jpg",
+    "priceRange": "$100 - $600"
   }
   </script>
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
+
   <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    Static copy of the contact form. Netlify only discovers forms in the built
+    HTML, and the real form is rendered by React, so this declares it. The field
+    names must match src/pages/Contact.js.
+  -->
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input name="bot-field" />
+    <input name="name" />
+    <input name="email" />
+    <input name="phone" />
+    <input name="subject" />
+    <textarea name="message"></textarea>
+  </form>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+  <div id="root"></div>
 </body>
 
 </html>

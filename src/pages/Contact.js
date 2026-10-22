@@ -3,16 +3,31 @@ import Hero from '../components/Hero';
 import Banner from '../components/Banner';
 import { usePageTitle } from '../hooks/usePageTitle';
 
+const EMPTY_FORM = {
+  name: '',
+  email: '',
+  phone: '',
+  subject: 'general',
+  message: ''
+};
+
+const validate = ({ name, email, message }) => {
+  if (!name.trim()) return 'Please enter your name';
+  if (!email.trim()) return 'Please enter your email';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Please enter a valid email';
+  if (!message.trim()) return 'Please enter a message';
+  return null;
+};
+
+// Netlify Forms reads application/x-www-form-urlencoded. The matching static
+// form in public/index.html is what makes Netlify register "contact".
+const encode = data => new URLSearchParams(data).toString();
+
 const Contact = memo(() => {
   usePageTitle('Contact Us', 'Get in touch with Beach Resort for bookings and inquiries');
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: 'general',
-    message: ''
-  });
+  const [formData, setFormData] = useState(EMPTY_FORM);
+  const [botField, setBotField] = useState('');
   const [status, setStatus] = useState({ type: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -21,18 +36,10 @@ const Contact = memo(() => {
     setFormData(prev => ({ ...prev, [name]: value }));
   }, []);
 
-  const validateForm = () => {
-    if (!formData.name.trim()) return 'Please enter your name';
-    if (!formData.email.trim()) return 'Please enter your email';
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) return 'Please enter a valid email';
-    if (!formData.message.trim()) return 'Please enter a message';
-    return null;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const error = validateForm();
+    const error = validate(formData);
     if (error) {
       setStatus({ type: 'error', message: error });
       return;
@@ -41,18 +48,20 @@ const Contact = memo(() => {
     setIsSubmitting(true);
     setStatus({ type: '', message: '' });
 
-    // Simulate form submission (replace with actual API call)
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setStatus({
-        type: 'success',
-        message: 'Thank you for your message! We will get back to you within 24 hours.'
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({ 'form-name': 'contact', 'bot-field': botField, ...formData })
       });
-      setFormData({ name: '', email: '', phone: '', subject: 'general', message: '' });
+      if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+
+      setStatus({ type: 'success', message: 'Thank you! Your message has been sent.' });
+      setFormData(EMPTY_FORM);
     } catch (err) {
       setStatus({
         type: 'error',
-        message: 'Something went wrong. Please try again later.'
+        message: 'Sorry, your message could not be sent. Please try again later.'
       });
     } finally {
       setIsSubmitting(false);
@@ -65,31 +74,38 @@ const Contact = memo(() => {
         <Banner title="Contact Us" subtitle="We'd love to hear from you" />
       </Hero>
 
-      <section className="contact-section" id="main-content">
+      <section className="contact-section">
         <div className="contact-container">
           <div className="contact-info">
             <h3>Get in Touch</h3>
+            <p className="contact-note">
+              This is a demo site for a fictional resort. The details below are
+              placeholders, but messages sent through the form do reach the
+              developer.
+            </p>
             <div className="contact-details">
               <div className="contact-item">
                 <h4>Address</h4>
-                <p>123 Beach Resort Drive<br />Paradise Coast, PC 12345</p>
+                <p>123 Demo Street<br />Sampletown, ST 00000</p>
               </div>
               <div className="contact-item">
                 <h4>Phone</h4>
-                <p><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                <p><a href="tel:+15550100100">+1 (555) 010-0100</a></p>
               </div>
               <div className="contact-item">
                 <h4>Email</h4>
-                <p><a href="mailto:info@beachresort.com">info@beachresort.com</a></p>
-              </div>
-              <div className="contact-item">
-                <h4>Hours</h4>
-                <p>Reception: 24/7<br />Reservations: 8AM - 10PM</p>
+                <p><a href="mailto:hello@example.com">hello@example.com</a></p>
               </div>
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit} noValidate>
+          <form
+            className="contact-form"
+            name="contact"
+            method="POST"
+            onSubmit={handleSubmit}
+            noValidate
+          >
             <h3>Send us a Message</h3>
 
             {status.message && (
@@ -97,6 +113,18 @@ const Contact = memo(() => {
                 {status.message}
               </div>
             )}
+
+            {/* Honeypot: hidden from people, filled in by bots. */}
+            <p hidden>
+              <label>
+                Don't fill this out
+                <input
+                  name="bot-field"
+                  value={botField}
+                  onChange={e => setBotField(e.target.value)}
+                />
+              </label>
+            </p>
 
             <div className="form-group">
               <label htmlFor="name">Name *</label>
@@ -134,7 +162,7 @@ const Contact = memo(() => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="+1 (234) 567-890"
+                placeholder="Optional"
               />
             </div>
 

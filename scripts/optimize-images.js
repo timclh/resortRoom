@@ -1,65 +1,61 @@
+// Re-encodes the source JPEGs in src/images as WebP, keeping each image's
+// native aspect ratio and never upscaling. Also renders the social preview
+// image (public/og-image.jpg). Run with: npm run optimize-images
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const IMAGES_DIR = path.join(__dirname, '../src/images');
-const OUTPUT_DIR = path.join(__dirname, '../src/images/optimized');
+const SRC = path.join(__dirname, '../src/images');
+const OUT = path.join(SRC, 'optimized');
+const OG_OUT = path.join(__dirname, '../public/og-image.jpg');
 
-// Ensure output directory exists
-if (!fs.existsSync(OUTPUT_DIR)) {
-  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-}
+const MAX_WIDTH = 1280;
+const WEBP_QUALITY = 75;
 
-// Get all JPEG images
-const images = fs.readdirSync(IMAGES_DIR).filter(file =>
-  file.endsWith('.jpeg') || file.endsWith('.jpg')
-);
+const kb = bytes => `${(bytes / 1024).toFixed(0)} KB`;
 
-console.log(`Found ${images.length} images to optimize...\n`);
+async function main() {
+  // Start clean so renamed or deleted sources never leave stale outputs behind.
+  fs.rmSync(OUT, { recursive: true, force: true });
+  fs.mkdirSync(OUT, { recursive: true });
 
-async function optimizeImage(filename) {
-  const inputPath = path.join(IMAGES_DIR, filename);
-  const baseName = path.basename(filename, path.extname(filename));
+  const sources = fs
+    .readdirSync(SRC)
+    .filter(file => /\.jpe?g$/i.test(file))
+    .sort();
 
-  try {
-    // Create WebP version (smaller, modern format)
-    await sharp(inputPath)
-      .resize(800, 600, { fit: 'cover', withoutEnlargement: true })
-      .webp({ quality: 80 })
-      .toFile(path.join(OUTPUT_DIR, `${baseName}.webp`));
+  let before = 0;
+  let after = 0;
 
-    // Create optimized JPEG fallback
-    await sharp(inputPath)
-      .resize(800, 600, { fit: 'cover', withoutEnlargement: true })
-      .jpeg({ quality: 80, progressive: true })
-      .toFile(path.join(OUTPUT_DIR, `${baseName}.jpg`));
+  for (const file of sources) {
+    const name = path.basename(file, path.extname(file));
+    const input = path.join(SRC, file);
+    const output = path.join(OUT, `${name}.webp`);
 
-    // Create thumbnail for lazy loading placeholder
-    await sharp(inputPath)
-      .resize(20, 15, { fit: 'cover' })
-      .blur(5)
-      .webp({ quality: 20 })
-      .toFile(path.join(OUTPUT_DIR, `${baseName}-placeholder.webp`));
+    const info = await sharp(input)
+      .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+      .webp({ quality: WEBP_QUALITY })
+      .toFile(output);
 
-    const originalSize = fs.statSync(inputPath).size;
-    const webpSize = fs.statSync(path.join(OUTPUT_DIR, `${baseName}.webp`)).size;
-    const savings = ((1 - webpSize / originalSize) * 100).toFixed(1);
-
-    console.log(`✓ ${filename}: ${(originalSize/1024).toFixed(0)}KB → ${(webpSize/1024).toFixed(0)}KB (${savings}% smaller)`);
-  } catch (err) {
-    console.error(`✗ ${filename}: ${err.message}`);
-  }
-}
-
-async function run() {
-  console.log('Starting image optimization...\n');
-
-  for (const image of images) {
-    await optimizeImage(image);
+    const original = fs.statSync(input).size;
+    before += original;
+    after += info.size;
+    console.log(
+      `${file.padEnd(18)} ${kb(original).padStart(7)} -> ${kb(info.size).padStart(6)}  (${info.width}x${info.height})`
+    );
   }
 
-  console.log('\n✓ Image optimization complete!');
-  console.log(`  Output directory: ${OUTPUT_DIR}`);
+  console.log(`\n${sources.length} images: ${kb(before)} -> ${kb(after)}`);
+
+  // 1200x630 is the size Facebook, LinkedIn, Slack and Twitter expect.
+  await sharp(path.join(SRC, 'room-1.jpeg'))
+    .resize(1200, 630, { fit: 'cover' })
+    .jpeg({ quality: 80, mozjpeg: true })
+    .toFile(OG_OUT);
+  console.log(`og-image.jpg      ${kb(fs.statSync(OG_OUT).size)}`);
 }
 
-run();
+main().catch(err => {
+  console.error(err);
+  process.exit(1);
+});

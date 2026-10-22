@@ -5,11 +5,16 @@ import PropTypes from "prop-types";
 import { memo } from "react";
 const Room = memo(({ room }) => {
   const { name, slug, images, price } = room;
-  // console.log(name);
   return (
     <article className="room">
       <div className="img-container">
-        <img src={images[0] || defaultImg} alt={name} loading="lazy" />
+        <img
+          src={images[0] || defaultImg}
+          alt={name}
+          width="1280"
+          height="720"
+          loading="lazy"
+        />
         <div className="price-top">
           <h6>${price}</h6>
           <p>per night</p>
