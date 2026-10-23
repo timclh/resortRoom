@@ -14,6 +14,13 @@ and pets, and open a detail page for each room. There is also a contact form.
   through a context provider (`src/context.js`)
 - Hosted on Netlify; the contact form uses Netlify Forms
 
+## Requirements
+
+Node 20 or newer; `.nvmrc` pins 22. Netlify reads `.nvmrc` too, and it takes
+precedence over a `NODE_VERSION` set in the site settings. Some dev dependencies
+(`sharp`, Testing Library 16) refuse to install on older Node, which fails the
+deploy at the install step.
+
 ## Scripts
 
 | Command | What it does |
