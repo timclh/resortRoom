@@ -785,3 +785,85 @@ h6 {
   font-size: 0.9rem;
   line-height: 1.5;
 }
+
+/* AI concierge */
+.concierge {
+  padding: 4rem 0 0;
+}
+.concierge-form {
+  width: 90vw;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.concierge-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  letter-spacing: var(--mainSpacing);
+}
+.concierge-row {
+  display: flex;
+  gap: 0.75rem;
+}
+.concierge-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid var(--mainBlack);
+  border-radius: var(--mainBorderRadius);
+}
+.concierge-row input:focus {
+  outline: none;
+  border-color: var(--primaryColor);
+  box-shadow: 0 0 0 3px rgba(175, 154, 125, 0.3);
+}
+.concierge-row .btn-primary {
+  cursor: pointer;
+  white-space: nowrap;
+}
+.concierge-row .btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.concierge-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.concierge-example,
+.concierge-clear {
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--mainBlack);
+  background: transparent;
+  border: 1px solid var(--darkGrey);
+  border-radius: 1rem;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+}
+.concierge-example:hover:not(:disabled),
+.concierge-clear:hover {
+  border-color: var(--primaryColor);
+  background: var(--offWhite);
+}
+.concierge-example:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.concierge-status {
+  min-height: 1.5rem;
+  margin-top: 0.75rem;
+  color: #555;
+}
+.concierge-note {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #666;
+}
+@media screen and (max-width: 520px) {
+  .concierge-row {
+    flex-direction: column;
+  }
+}

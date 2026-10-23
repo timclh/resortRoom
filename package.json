@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=20"
+    "node": ">=22.12.0"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.1.0",
+    "@netlify/blobs": "^11.1.6",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -24,7 +26,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "optimize-images": "node scripts/optimize-images.js",
-    "analyze": "source-map-explorer 'build/static/js/*.js' --no-border-checks"
+    "analyze": "source-map-explorer 'build/static/js/*.js' --no-border-checks",
+    "eval:concierge": "node scripts/eval-concierge.mjs"
   },
   "eslintConfig": {
     "extends": "react-app"
