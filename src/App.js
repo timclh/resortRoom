@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 import Loading from './components/Loading';
 import ErrorBoundary from './components/ErrorBoundary';
 import SkipLink from './components/SkipLink';
-import CookieConsent from './components/CookieConsent';
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -30,7 +29,6 @@ function App() {
           </Routes>
         </Suspense>
       </main>
-      <CookieConsent />
     </ErrorBoundary>
   );
 }

@@ -2,14 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
-import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { RoomProvider } from './context';
 
-// React 18 createRoot API
-const container = document.getElementById('root');
-const root = createRoot(container);
+const root = createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
@@ -21,9 +17,10 @@ root.render(
   </React.StrictMode>
 );
 
-// Enable service worker for offline support and faster loading
-serviceWorker.register();
-
-// Report Web Vitals for performance monitoring
-// In production, you could send these metrics to an analytics endpoint
-reportWebVitals(console.log);
+// Log Core Web Vitals while developing. The condition is resolved at build
+// time, so web-vitals is left out of the production bundle.
+if (process.env.NODE_ENV === 'development') {
+  import('./reportWebVitals').then(({ default: reportWebVitals }) =>
+    reportWebVitals(console.log)
+  );
+}

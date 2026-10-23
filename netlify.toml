@@ -1,0 +1,19 @@
+# Build settings are left to Netlify's Create React App defaults. This file only
+# adds response headers.
+
+# Everything under /static is content-hashed by the build (main.<hash>.js,
+# images, ...), so it can be cached for a year without ever going stale. Netlify
+# revalidates every other file on each load by default; index.html must keep
+# doing that so a new deploy is picked up straight away.
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

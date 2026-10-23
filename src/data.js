@@ -16,7 +16,7 @@ import img10 from "./images/optimized/room-10.webp";
 import img11 from "./images/optimized/room-11.webp";
 import img12 from "./images/optimized/room-12.webp";
 
-export default [
+const rooms = [
   {
     sys: {
       id: "1"
@@ -759,3 +759,5 @@ export default [
     }
   }
 ];
+
+export default rooms;

@@ -4,10 +4,11 @@ import Banner from "../components/Banner";
 import { Link, useParams } from "react-router-dom";
 import { RoomContext } from "../context";
 import StyledHero from "../components/StyledHero";
+import Loading from "../components/Loading";
 
 const SingleRoom = () => {
   const { slug } = useParams();
-  const { getRoom } = useContext(RoomContext);
+  const { getRoom, loading } = useContext(RoomContext);
   const previousTitle = useRef(document.title);
 
   const room = getRoom(slug);
@@ -22,6 +23,11 @@ const SingleRoom = () => {
       document.title = savedTitle;
     };
   }, [room]);
+
+  // Rooms are filled in after the first render; don't flash "not found" first.
+  if (loading) {
+    return <Loading />;
+  }
 
   if (!room) {
     return (
@@ -60,7 +66,14 @@ const SingleRoom = () => {
       <section className="single-room">
         <div className="single-room-images">
           {defaultImages.map((item, index) => (
-            <img key={index} src={item} alt={name} loading="lazy" />
+            <img
+              key={index}
+              src={item}
+              alt={`${name}, view ${index + 2}`}
+              width="1280"
+              height="720"
+              loading="lazy"
+            />
           ))}
         </div>
         <div className="single-room-info">

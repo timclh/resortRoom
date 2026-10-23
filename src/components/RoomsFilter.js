@@ -89,11 +89,12 @@ const RoomsFilter = ({ rooms }) => {
         {/* end of room price*/}
         {/* size */}
         <div className="form-group">
-          <label htmlFor="price">room size </label>
+          <label htmlFor="minSize">room size </label>
           <div className="size-inputs">
             <input
               type="number"
               name="minSize"
+              id="minSize"
               value={minSize}
               onChange={handleChange}
               className="size-input"
@@ -104,6 +105,7 @@ const RoomsFilter = ({ rooms }) => {
               value={maxSize}
               onChange={handleChange}
               className="size-input"
+              aria-label="maximum room size"
             />
           </div>
         </div>
@@ -124,10 +126,11 @@ const RoomsFilter = ({ rooms }) => {
             <input
               type="checkbox"
               name="pets"
+              id="pets"
               checked={pets}
               onChange={handleChange}
             />
-            <label htmlFor="breakfast">pets</label>
+            <label htmlFor="pets">pets</label>
           </div>
         </div>
         {/* end of extras type */}

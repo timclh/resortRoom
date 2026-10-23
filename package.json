@@ -2,7 +2,12 @@
   "name": "resort",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.1.0",
+    "@netlify/blobs": "^11.1.6",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -17,11 +22,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI= react-scripts build",
+    "build": "CI= react-scripts build && node scripts/postbuild.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "optimize-images": "node scripts/optimize-images.js",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js' --no-border-checks",
+    "eval:concierge": "node scripts/eval-concierge.mjs"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,7 +45,8 @@
     ]
   },
   "devDependencies": {
-    "sharp-cli": "^5.2.0",
+    "@testing-library/dom": "^10.4.2",
+    "sharp": "^0.34.5",
     "source-map-explorer": "^2.5.3"
   }
 }

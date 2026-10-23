@@ -100,6 +100,36 @@ const RoomProvider = ({ children }) => {
     }));
   }, []);
 
+  // Replace the whole search at once, e.g. from the AI concierge. Anything not
+  // given goes back to its default, so each request is a fresh search.
+  const applyFilters = useCallback(({
+    type = "all",
+    guests = 1,
+    maxPrice = null,
+    minSize = null,
+    breakfast = false,
+    pets = false
+  } = {}) => {
+    const types = new Set(rooms.map(room => room.type));
+    const capacities = [...new Set(rooms.map(room => room.capacity))].sort((a, b) => a - b);
+    // The guests filter means "sleeps at least this many". Snap up to a size
+    // that exists in the dropdown (7 guests and 10 guests match the same rooms);
+    // a party bigger than any room is kept as is and matches nothing.
+    const fitting = capacities.find(capacity => capacity >= guests);
+
+    setFilters(prev => ({
+      ...prev,
+      type: types.has(type) ? type : "all",
+      capacity: fitting === undefined ? guests : fitting,
+      price: maxPrice === null ? prev.maxPrice : Math.min(maxPrice, prev.maxPrice),
+      minSize: minSize === null ? 0 : minSize,
+      breakfast,
+      pets
+    }));
+  }, [rooms]);
+
+  const resetFilters = useCallback(() => applyFilters(), [applyFilters]);
+
   // Memoize context value to prevent unnecessary re-renders
   const contextValue = useMemo(() => ({
     rooms,
@@ -108,8 +138,10 @@ const RoomProvider = ({ children }) => {
     loading,
     ...filters,
     getRoom,
-    handleChange
-  }), [rooms, sortedRooms, featuredRooms, loading, filters, getRoom, handleChange]);
+    handleChange,
+    applyFilters,
+    resetFilters
+  }), [rooms, sortedRooms, featuredRooms, loading, filters, getRoom, handleChange, applyFilters, resetFilters]);
 
   return (
     <RoomContext.Provider value={contextValue}>
